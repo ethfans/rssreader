@@ -19,6 +19,7 @@ func ParseConf() (Config, error) {
 
 type Config struct {
 	Values []string `json:"values"`
+	Port   int      `json:"port"`
 
 	ReFresh        int    `json:"refresh"`
 	AutoUpdatePush int    `json:"autoUpdatePush"`
@@ -34,12 +35,20 @@ type Config struct {
 type Notify struct {
 	FeiShu   FeiShu   `json:"feishu"`
 	Telegram Telegram `json:"telegram"`
+	Dingtalk Dingtalk `json:"dingtalk"`
 }
 
 // FeiShu 飞书
 type FeiShu struct {
 	//Text string `json:"text"`
 	API string `json:"api"`
+}
+
+// Dingtalk 钉钉
+type Dingtalk struct {
+	//Text string `json:"text"`
+	Webhook string `json:"webhook"`
+	Sign    string `json:"sign"`
 }
 
 // Telegram 电报

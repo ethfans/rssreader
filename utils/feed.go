@@ -149,8 +149,9 @@ func Check(url string, result *gofeed.Feed, v *gofeed.Item) {
 				globals.Hash[link] = 1
 				// 发送通知
 				go Notify(Message{
-					Routes:  []string{FeiShuRoute, TelegramRoute},
-					Content: fmt.Sprintf("%s\n%s", msg, v.Link),
+					Routes:   []string{FeiShuRoute, TelegramRoute, DingtalkRoute},
+					Content:  fmt.Sprintf("%s\n%s", msg, v.Link),
+					FeedItem: *v,
 				})
 				globals.WriteFile(globals.RssUrls.Archives, link)
 			}

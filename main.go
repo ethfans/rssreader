@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -29,7 +30,9 @@ func main() {
 	//加载静态文件
 	fs := http.FileServer(http.FS(globals.DirStatic))
 	http.Handle("/static/", fs)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	port := globals.RssUrls.Port
+	serve := fmt.Sprintf("%s%d", ":", port)
+	log.Fatal(http.ListenAndServe(serve, nil))
 }
 
 func serveHome(w http.ResponseWriter, r *http.Request) {
@@ -120,8 +123,8 @@ func wsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-//获取关键词也就是title
-//获取feeds列表
+// 获取关键词也就是title
+// 获取feeds列表
 func getKeywords() string {
 	words := ""
 	for _, url := range globals.RssUrls.Values {

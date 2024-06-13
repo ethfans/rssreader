@@ -1,4 +1,5 @@
 {
+    "port": 8080,
     "values": [
         "https://linux.do/latest.rss",
         "https://rss.nodeseek.com",
@@ -15,6 +16,10 @@
     "notify" : {
         "feishu": {
             "api": ""
+        },
+        "dingtalk": {
+            "webhook": "",
+            "sign": ""
         },
         "telegram": {
             "api": "https://api.telegram.org/bot${token}/sendMessage",
