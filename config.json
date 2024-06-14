@@ -1,5 +1,5 @@
 {
-    "port": 18080,
+    "port": 8080,
     "values": [
         "https://linux.do/latest.rss",
         "https://rss.nodeseek.com",
