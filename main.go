@@ -56,26 +56,21 @@ func tplHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	//判断现在是否是夜间
-	formattedTime := time.Now().Format("15:04:05")
-	darkMode := false
-	if globals.RssUrls.NightStartTime != "" && globals.RssUrls.NightEndTime != "" {
-		if globals.RssUrls.NightStartTime > formattedTime || formattedTime > globals.RssUrls.NightEndTime {
-			darkMode = true
-		}
-	}
-
 	// 定义一个数据对象
 	data := struct {
 		Keywords       string
 		RssDataList    []models.Feed
-		DarkMode       bool
 		AutoUpdatePush int
+		ListHeight     int
+		WebTitle       string
+		WebDes         string
 	}{
 		Keywords:       getKeywords(),
 		RssDataList:    utils.GetFeeds(),
-		DarkMode:       darkMode,
 		AutoUpdatePush: globals.RssUrls.AutoUpdatePush,
+		ListHeight:     globals.RssUrls.ListHeight,
+		WebTitle:       globals.RssUrls.WebTitle,
+		WebDes:         globals.RssUrls.WebDes,
 	}
 
 	// 渲染模板并将结果写入响应

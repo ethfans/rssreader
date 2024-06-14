@@ -21,10 +21,12 @@ type Config struct {
 	Values []string `json:"values"`
 	Port   int      `json:"port"`
 
-	ReFresh        int    `json:"refresh"`
-	AutoUpdatePush int    `json:"autoUpdatePush"`
-	NightStartTime string `json:"nightStartTime"`
-	NightEndTime   string `json:"nightEndTime"`
+	ReFresh        int `json:"refresh"`
+	AutoUpdatePush int `json:"autoUpdatePush"`
+
+	ListHeight int    `json:"listHeight"`
+	WebTitle   string `json:"webTitle"`
+	WebDes     string `json:"webDes"`
 
 	Keywords []string `json:"keywords"` // 关键词
 	Notify   Notify   `json:"notify"`   // 通知方式

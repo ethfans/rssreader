@@ -46,7 +46,10 @@ func Init() {
 	for _, keyword := range conf.Keywords {
 		MatchList = append(MatchList, keyword)
 	}
-
+	_, err = os.Open(conf.Archives)
+	if err != nil {
+		WriteFile(conf.Archives, "")
+	}
 	ReadFile(conf.Archives)
 }
 
