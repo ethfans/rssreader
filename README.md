@@ -4,28 +4,24 @@
 
 ## 特性
 
-- 打包后镜像大小仅有约20MB，通过docker实现一键部署
+***在原有代码调整了以下功能***
 
-- 支持自定义配置页面数据自动刷新
+* 增加钉钉通知
+* 修改前端展示UI，参考(copy) [https://www.nodeseek.com/post-117926-1](https://www.nodeseek.com/post-117926-1) 这个大佬
+* 根据系统配置自动切换黑夜白天
+* 配置文件增加了自定义端口（没什么用，主要我本地开发80）
 
-- 响应式布局，能够兼容不同的屏幕大小
-
-- 良好的SEO，首次加载使用模版引擎快速展示页面内容
-
-- 支持添加多个RSS订阅链接
-
-- 简洁的页面布局，可以查看每个订阅链接最后更新时间
-
-- 支持夜间模式
-
-- config.json配置文件支持热更新
-
-- ***在原作者基础上，进行二次开发，增加了识别关键词后，推送通知到飞书和Telegram（2024年6月2日）*** ***注意⚠：docker-compose.yml 中端口默认是9898***
-
-  
 2023年7月28日，进行了界面改版和升级
 
+## TODO
+
+* [ ] 页面自定义提醒
+
+## 预览
+
 ![](pc.png)
+
+![](pc_night.png)
 
 ![](mobile.png)
 
@@ -43,33 +39,43 @@ TG机器人创建和权限赋予教程请看 https://www.telegramhcn.com/article
 
 ```json
 {
+    "port": 8080,
     "values": [
-        "https://www.zhihu.com/rss",
-        "https://tech.meituan.com/feed/",
-        "http://www.ruanyifeng.com/blog/atom.xml",
-        "https://feeds.appinn.com/appinns/",
+        "https://linux.do/latest.rss",
+        "https://rss.nodeseek.com",
+        "https://hostloc.com/forum.php?mod=rss&fid=45&auth=389ec3vtQanmEuRoghE%2FpZPWnYCPmvwWgSa7RsfjbQ%2BJpA%2F6y6eHAx%2FKqtmPOg",
         "https://v2ex.com/feed/tab/tech.xml",
-        "https://www.cmooc.com/feed",
-        "http://www.sciencenet.cn/xml/blog.aspx?di=30",
-        "https://www.douban.com/feed/review/book",
-        "https://www.douban.com/feed/review/movie",
-        "https://www.geekpark.net/rss",
-        "https://hostloc.com/forum.php?mod=rss&fid=45&auth=389ec3vtQanmEuRoghE%2FpZPWnYCPmvwWgSa7RsfjbQ%2BJpA%2F6y6eHAx%2FKqtmPOg"
+        "https://www.dalao.net/feed.htm"
     ],
-    "refresh": 6,
+    "refresh": 5,
     "autoUpdatePush": 7,
-    "nightStartTime": "06:30:00",
-    "nightEndTime": "19:30:00"
+    "listHeight": 600,
+    "webTitle": "Hello MJJ",
+    "webDes": "MJJ station",
+    "keywords": ["cc","cloudcone","rn","racknerd","咸鱼","4837","jpp","hk2p"],
+    "notify": {
+        "feishu": {
+            "api": ""
+        },
+        "dingtalk": {
+            "webhook": "",
+            "sign": ""
+        },
+        "telegram": {
+            "api": "https://api.telegram.org/bot${token}/sendMessage",
+            "chat_id": "",
+            "token": ""
+        }
+    },
+    "archives": "archives.txt"
 }
 ```
 
-名称 | 说明
--|-
-values | rss订阅链接（必填）
-refresh | rss订阅更新时间间隔，单位分钟（必填）
-autoUpdatePush | 自动刷新间隔，默认为0，不开启。效果为前端每autoUpdatePush分钟自动更新页面信息，单位分钟（非必填）
-nightStartTime | 日间开始时间 ，如 06:30:00
-nightEndTime | 日间结束时间，如 19:30:00
+| 名称           | 说明                                                                                              |
+| -------------- | ------------------------------------------------------------------------------------------------- |
+| values         | rss订阅链接（必填）                                                                               |
+| refresh        | rss订阅更新时间间隔，单位分钟（必填）                                                             |
+| autoUpdatePush | 自动刷新间隔，默认为0，不开启。效果为前端每autoUpdatePush分钟自动更新页面信息，单位分钟（非必填） |
 
 # 使用方式
 
@@ -90,6 +96,7 @@ docker-compose up -d
 ```
 
 国内服务器将Dockerfile中取消下面注释使用 go mod 镜像
+
 ```dockerfile
 #RUN go env -w GO111MODULE=on && \
 #    go env -w GOPROXY=https://goproxy.cn,direct
@@ -128,3 +135,4 @@ server {
     rewrite ^(.*)$ https://$host$1 permanent;
 }
 ```
+
