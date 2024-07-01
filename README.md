@@ -13,6 +13,12 @@
 
 2023年7月28日，进行了界面改版和升级
 
+2024/07/01
+* 增加关键字匹配，支持过滤掉指定关键字写法, 格式如下,用空格隔开，关键字前增加减号则表示排除不包含
+```json
+ ["抽奖 -测评"]
+```
+
 ## TODO
 
 * [ ] 页面自定义提醒
@@ -52,7 +58,7 @@ TG机器人创建和权限赋予教程请看 https://www.telegramhcn.com/article
     "listHeight": 600,
     "webTitle": "Hello MJJ",
     "webDes": "MJJ station",
-    "keywords": ["cc","cloudcone","rn","racknerd","咸鱼","4837","jpp","hk2p"],
+    "keywords": ["抽奖 -测评","cloudcone","rn","racknerd","咸鱼","4837","jpp","hk2p"],
     "notify": {
         "feishu": {
             "api": ""
