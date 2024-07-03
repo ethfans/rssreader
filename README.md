@@ -92,7 +92,7 @@ TG机器人创建和权限赋予教程请看 https://www.telegramhcn.com/article
 克隆项目
 
 ```bash
-git clone https://github.com/okhanyu/rss-reader
+git clone https://github.com/huhengbo/rss-reader
 ```
 
 进入rss-reader文件夹，运行项目
